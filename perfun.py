@@ -4,8 +4,7 @@ weapons={
 }
 dictionaries=[]
 
-def select(dictionaries):
-    print
+
 #number ensure function (make sure user input is a number(with parameters)
 def ensure(l,h):
     while True:
@@ -23,12 +22,14 @@ def ensure(l,h):
 #view function (prints Weapon name and info)
 def view(dictionary):
     for key in dictionary:
-        print(f"{key}:{dictionary[key]}")
+        print(f"{key}:{dictionary[key][0]},{dictionary[key][1]},{dictionary[key][2]}")
 #Add function (asks user for Weapon name, asks user for Weapon info, adds them to a dictionary)
 def plus(dictionary):
     name=input(f"What is the name of the item you would like to add to your inventory?\n")
     info=input(f"What is information you would like to give {name}?\n")
-    dictionary[name]=info
+    value=input(f"What is the value of {name}?\n")
+    weight=input(f"What is the weight of {name}?\n")
+    dictionary[name]=[info,value,weight]
     print(f"{name}:{dictionary[name]}")
     return dictionary
 #Remove function (print dictionary, asks user for number Weapon that they want to remove,removes them to a dictionary)
@@ -55,11 +56,11 @@ def search(dictionary):
     if bol==2:
         for i in range(0,len(key)):
             if f'{inp}' in dictionary[key[i]]:
-                print(f"{key[i]}:{dictionary[key[i]]}")
+                print(f"{key[i]}:{dictionary[key[i]][0]},{dictionary[key[i]][1]},{dictionary[key[i]][2]}")
             else:
                 continue
 #main function for loop
-def main(dictionary):
+def edit(dictionary):
     while True:
         print(f"1:View your weapons\n2:add weapon to inventory\n3:remove item from inventory\n4:search inventory for specific weapon/attribute\n5:Exit calculator\nWhich option do you want to use?")
         inp=ensure(1,6)
@@ -73,5 +74,8 @@ def main(dictionary):
             search(dictionary)
         elif inp==5:
             break
+#User input for choosing dictionary to edit
+def choice(list,weapons,spells,skills,inventory):
+    pass
 
-main(weapons)
+edit(weapons)
