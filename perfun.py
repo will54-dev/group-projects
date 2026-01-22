@@ -1,8 +1,21 @@
-#Weapon Dictionary
-weapons={
+#Dictionaries 
+weapons={ #weapons that character has
 
 }
-dictionaries=[]
+inventory={ #items that player has
+
+}
+skills={ #class/race/feat Features
+
+}
+spells={ #spells and their descriptions
+
+}
+#lists
+prof=[] #proficiencies in weapons, tools, armor, shields and skills
+
+#tuples
+dictionaries=() #tuple of the dictionary names
 
 
 #number ensure function (make sure user input is a number(with parameters)
@@ -19,7 +32,7 @@ def ensure(l,h):
                 return int(num)
             else:
                 print("Please enter a valid input")
-#view function (prints Weapon name and info)
+#view function (prints dictionary contents name and info)
 def view(dictionary):
     for key in dictionary:
         print(f"{key}:{dictionary[key][0]},{dictionary[key][1]},{dictionary[key][2]}")
@@ -42,7 +55,7 @@ def minus(dictionary):
     else:
         print(f"{name} wasn't found in inventory")
     return dictionary
-#Search (ask what they want to search by (effect or name) and print any weapons that fufil the requirements)
+#Search (ask what they want to search by (effect or name) and print any weapons that fulfil the requirements)
 def search(dictionary):
     key=list(dict(dictionary).keys())
     print("How would you like to search your inventory\n1. name\n2. feature")
@@ -59,10 +72,10 @@ def search(dictionary):
                 print(f"{key[i]}:{dictionary[key[i]][0]},{dictionary[key[i]][1]},{dictionary[key[i]][2]}")
             else:
                 continue
-#main function for loop
-def edit(dictionary):
+#main function for selection how you are editing the dictionary
+def edit(dictionary,tuple,num):
     while True:
-        print(f"1:View your weapons\n2:add weapon to inventory\n3:remove item from inventory\n4:search inventory for specific weapon/attribute\n5:Exit calculator\nWhich option do you want to use?")
+        print(f"1:View your {tuple[num]}\n2:add to {tuple[num]}\n3:remove a {tuple[num]}\n4:search {tuple[num]} for specific name/attribute\n5:Exit editor\nWhich option do you want to use?")
         inp=ensure(1,6)
         if inp==1:
             view(dictionary)
@@ -74,8 +87,23 @@ def edit(dictionary):
             search(dictionary)
         elif inp==5:
             break
+    return dictionary
 #User input for choosing dictionary to edit
-def choice(list,weapons,spells,skills,inventory):
-    pass
-
+def choice(tuple,weapons,skills,inventory,spells):
+    print(f"What would you like to edit?")
+    for i in range(0,len(tuple)):
+        print(f"{i+1}:{tuple[i]}")
+    inp=ensure(1,len(tuple)+1)
+    if inp==1:
+        edit(weapons,tuple,0)
+        return weapons
+    if inp==2:
+        edit(skills,tuple,1)
+        return skills
+    if inp==3:
+        edit(inventory,tuple,2)
+        return inventory
+    if inp==4:
+        edit(spells,tuple,3)
+        return spells
 edit(weapons)
