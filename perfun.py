@@ -15,6 +15,14 @@ if cls=="wizard":
 else:
     dictionaries=(weapons,inventory)
 
+#number ensure function (make sure user input is a number)
+def insure():
+    while True:
+        num=input()
+        if f"{num}".isnumeric() and  int(num):
+            return int(num)
+        else:
+                print("Please enter a valid input")
 #number ensure function (make sure user input is a number(with parameters)
 def ensure(l,h):
     while True:
@@ -32,13 +40,15 @@ def ensure(l,h):
 #view function (prints dictionary contents name and info)
 def view(dictionary):
     for key in dictionary:
-        print(f"{key}:{dictionary[key][0]},{dictionary[key][1]},{dictionary[key][2]}")
+        print(f"{key}:{dictionary[key][0]}, value:{dictionary[key][1]}, weight:{dictionary[key][2]}")
 #Add function (asks user for Weapon name, asks user for Weapon info, adds them to a dictionary)
 def plus(dictionary):
     name=input(f"What is the name of the item you would like to add to your inventory?\n")
     info=input(f"What is information you would like to give {name}?\n")
-    value=input(int(f"What is the value of {name}?\n"))
-    weight=input(int(f"What is the weight of {name}?\n"))
+    print(f"What is the value of {name}?")
+    value=insure()
+    print(f"What is the weight of {name}?")
+    weight=insure()
     dictionary[name]=[info,value,weight]
     print(f"{name} added to inventory")
     return dictionary
@@ -60,13 +70,13 @@ def search(dictionary):
     inp=input("What are you searching for?")
     if bol==1:
         if inp in dictionary:
-            print(f"{inp}:{dictionary[inp]}")
+            print(f"{inp}:{dictionary[inp][0]}, value:{dictionary[inp][1]}, weight:{dictionary[inp][2]} ")
         else:
             print(f"{inp} not in inventory")
     if bol==2:
         for i in range(0,len(key)):
-            if f'{inp}' in dictionary[key[i]]:
-                print(f"{key[i]}:{dictionary[key[i]][0]},{dictionary[key[i]][1]},{dictionary[key[i]][2]}")
+            if f'{inp}' in dictionary[key[i]][0]:
+                print(f"{key[i]}:{dictionary[key[i]][0]}, value:{dictionary[key[i]][1]}, weight:{dictionary[key[i]][2]}")
             else:
                 continue
 #main function for selection how you are editing the dictionary
