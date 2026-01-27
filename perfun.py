@@ -8,6 +8,9 @@ inventory={ #items that player has
 spells={ #spells and their descriptions
 
 }
+
+
+
 cls="wizard"
 #tuples
 if cls=="wizard":
@@ -38,19 +41,37 @@ def ensure(l,h):
             else:
                 print("Please enter a valid input")
 #view function (prints dictionary contents name and info)
-def view(dictionary):
+def view(dictionary,dictname):
     for key in dictionary:
-        print(f"{key}:{dictionary[key][0]}, value:{dictionary[key][1]}, weight:{dictionary[key][2]}")
+        if dictname=="weapons"or"inventory":
+            print(f"{key}:{dictionary[key][0]}, value:{dictionary[key][1]}, weight:{dictionary[key][2]}")
+        elif dictname=="spells":
+            print(f"{key}:{dictionary[key][0]}, level:{dictionary[key][1]}, casting:{dictionary[key][2]}")
 #Add function (asks user for Weapon name, asks user for Weapon info, adds them to a dictionary)
-def plus(dictionary):
+def plus(dictionary,dictname):
     name=input(f"What is the name of the item you would like to add to your inventory?\n")
     info=input(f"What is information you would like to give {name}?\n")
-    print(f"What is the value of {name}?")
-    value=insure()
-    print(f"What is the weight of {name}?")
-    weight=insure()
-    dictionary[name]=[info,value,weight]
-    print(f"{name} added to inventory")
+    match dictname:
+        case "weapons":
+            print(f"What is the value of {name}?")
+            value=insure()
+            print(f"What is the weight of {name}?")
+            weight=insure()
+            dictionary[name]=[info,value,weight]
+            print(f"{name} added to inventory")
+        case "inventory":
+            print(f"What is the value of {name}?")
+            value=insure()
+            print(f"What is the weight of {name}?")
+            weight=insure()
+            dictionary[name]=[info,value,weight]
+            print(f"{name} added to inventory")
+        case "spells":
+            print(f"What level of spell is {name}?")
+            spellev=insure()
+            time=input(f"What is the casting time of {name}?")
+            dictionary[name]=[info,spellev,time]
+            print(f"{name} added to inventory")
     return dictionary
 #Remove function (print dictionary, asks user for number Weapon that they want to remove,removes them to a dictionary)
 def minus(dictionary):
@@ -85,9 +106,9 @@ def edit(dictionary,dictname):
         print(f"1:View your {dictname}\n2:add to {dictname}\n3:remove a {dictname}\n4:search {dictname} for specific name/attribute\n5:Exit editor\nWhich option do you want to use?")
         inp=ensure(1,6)
         if inp==1:
-            view(dictionary)
+            view(dictionary,dictname)
         elif inp==2:
-            plus(dictionary)
+            plus(dictionary,dictname)
         elif inp==3:
             minus(dictionary)
         elif inp==4:
