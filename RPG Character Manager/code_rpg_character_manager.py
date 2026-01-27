@@ -6,21 +6,6 @@ class itme:
     value = str()
     description = str()
 
-class character:
-    class_ch = str()
-    race = str()
-    level = int()
-    strenght = str()
-    dexterity = str()
-    wisdom = str()
-    charisma = str()
-    intelligence = str()
-    constitution =str()
-    inventory = dict()
-    weapons = dict()
-    spells = dict()
-    Equipment_slots = dict()
-
 characters = dict()
 races = {
 

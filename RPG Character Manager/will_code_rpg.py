@@ -1,36 +1,46 @@
 # WH 2nd 
 
-class character:
-    class_ch = str()
-    race = str()
-    level = int()
-    strength = str()
-    dexterity = str()
-    wisdom = str()
-    charisma = str()
-    intelligence = str()
-    constitution =str()
-    inventory = dict()
-    weapons = dict()
-    spells = dict()
-    Equipment_slots = dict()
+characters = dict()
+modifer_list = {
+    "human": (1,2,3,4,5,6,7)
+
+}
 
 def help_isint_input(text):
-    want = input(text)
-    try:
-        return int(want)
-    except:
+    while True:
+        want = input(text)
         try:
-            return float(want)
+            return int(want)
         except:
-            print("Not a number.")
+            try:
+                return float(want)
+            except:
+                print("Not a number.")
 
 def modifier_selector(text, modifer_list):
-    pass
-def character_creator(characters):
-    character_name = input("What is the new character's name?")
-    new_character = character
+    print(f"what {text} do you want?")
+    count = 0
+    list_to_modifer = list()
+    for class_race in modifer_list.keys():
+        list_to_modifer.append(class_race)
+        count += 1
+        print(f"{count}: {class_race}")
+    want = input()
+
+    try:
+        class_race = modifer_list[want.strip()]
+        class_race = want
+    except:
+        try:
+            class_race = modifer_list[]
+
+def character_creator(characters = dict):
+    character_name = input("What is the new character's name?\n")
+    new_character = dict()
     text = ["level","strength","dexterity","wisdom","charisma","intelligence","constitution"]
-    modifier = [new_character.level,new_character.strength,new_character.dexterity,new_character.level,new_character.level,new_character.level]
-    for item in range(len(text)):
-        new_character.level = help_isint_input(f"")
+    for item in text:
+        new_character[item] = help_isint_input(f"What is {character_name}'s {item}?\n")
+    characters[character_name] = new_character
+    return characters
+
+modifier_selector("race",modifer_list)
