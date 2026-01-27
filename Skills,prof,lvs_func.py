@@ -1,12 +1,13 @@
-#define class_skills as a dictionary    
-#   wizard   to:    
-#      1: ["arcana", "spellcasting"]    
-#      3: ["ritual casting"]    
-#      5: ["fireball"]    
-#      7: ["counterspell"]    
-#      10: ["teleport"]    
-#      15: ["meteor swarm"]    
-#      20: ["wish"]    
+#define class_skills as a dictionary 
+class_skills = {
+wizard     
+      1: ["arcana", "spellcasting"]    
+      3: ["ritual casting"]    
+      5: ["fireball"]    
+      7: ["counterspell"]    
+      10: ["teleport"]    
+      15: ["meteor swarm"]    
+      20: ["wish"]    
 #   rogue   to:    
 #      1: ["stealth", "thieves’ tools"]    
 #      3: ["sneak attack"]    
@@ -23,16 +24,22 @@
 #      10: ["leadership"]    
 #      15: ["survivor"]    
 #      20: ["champion"]    
+}
   
 #define class_proficiencies as a dictionary    
-#   wizard   to: ["arcana", "history", "insight", "investigation"]    
-#   rogue   to: ["stealth", "acrobatics", "sleight of hand", "deception", "perception"]    
-#   fighter   to: ["athletics", "intimidation", "survival", "perception"]    
+wizard = ["arcana", "history", "insight", "investigation"]    
+rogue = ["stealth", "acrobatics", "sleight of hand", "deception", "perception"]    
+fighter = ["athletics", "intimidation", "survival", "perception"]    
   
-#define function get_class_features(character_class, level)    
+#define function get_class_features(character_class, level) 
+def get_class_features(character_class, level):
 #   create empty list called skills    
-#   for each key lv in class_skills[character_class], in increasing order:    
-#       if level greater than or equal to lv:    
+    skills = []
+for  key_lv in class_skills[character_class],:
+     
+#       if level greater than or equal to lv:
+        if level >= lv:
+              
 #           add all skills in class_skills[character_class][lv] to skills    
 #   set proficiencies to class_proficiencies[character_class]    
 #   return the set of skills, set of proficiencies    
