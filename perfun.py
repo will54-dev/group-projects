@@ -1,9 +1,19 @@
-#Weapon Dictionary
-weapons={
+#Dictionaries 
+weapons={ #weapons that character has
 
 }
-dictionaries=[]
+inventory={ #items that player has
 
+}
+spells={ #spells and their descriptions
+
+}
+cls="wizard"
+#tuples
+if cls=="wizard":
+    dictionaries=(weapons,inventory,spells) #tuple of the dictionary names
+else:
+    dictionaries=(weapons,inventory)
 
 #number ensure function (make sure user input is a number(with parameters)
 def ensure(l,h):
@@ -19,7 +29,7 @@ def ensure(l,h):
                 return int(num)
             else:
                 print("Please enter a valid input")
-#view function (prints Weapon name and info)
+#view function (prints dictionary contents name and info)
 def view(dictionary):
     for key in dictionary:
         print(f"{key}:{dictionary[key][0]},{dictionary[key][1]},{dictionary[key][2]}")
@@ -27,10 +37,10 @@ def view(dictionary):
 def plus(dictionary):
     name=input(f"What is the name of the item you would like to add to your inventory?\n")
     info=input(f"What is information you would like to give {name}?\n")
-    value=input(f"What is the value of {name}?\n")
-    weight=input(f"What is the weight of {name}?\n")
+    value=input(int(f"What is the value of {name}?\n"))
+    weight=input(int(f"What is the weight of {name}?\n"))
     dictionary[name]=[info,value,weight]
-    print(f"{name}:{dictionary[name]}")
+    print(f"{name} added to inventory")
     return dictionary
 #Remove function (print dictionary, asks user for number Weapon that they want to remove,removes them to a dictionary)
 def minus(dictionary):
@@ -42,8 +52,8 @@ def minus(dictionary):
     else:
         print(f"{name} wasn't found in inventory")
     return dictionary
-#Search (ask what they want to search by (effect or name) and print any weapons that fufil the requirements)
-def search_inventory(dictionary):
+#Search (ask what they want to search by (effect or name) and print any weapons that fulfil the requirements)
+def search(dictionary):
     key=list(dict(dictionary).keys())
     print("How would you like to search your inventory\n1. name\n2. feature")
     bol=ensure(1,3)
@@ -59,39 +69,10 @@ def search_inventory(dictionary):
                 print(f"{key[i]}:{dictionary[key[i]][0]},{dictionary[key[i]][1]},{dictionary[key[i]][2]}")
             else:
                 continue
-def compare_characters:
-    compare_first_character = input(characters, "Select your first character.\n")
-    while compare_first_character not in characters:
-        print("Try again. That character doesn't exit yet. :(")
-        compare_first_character = input(characters, "Select your first character.\n")       
-    compare_second_character = input(characters, "Select your second character.\n")
-    while compare_second_character not in characters:
-        print("Try again. That character doesn't exit yet. :(")
-        compare_second_character = input(characters, "Select your first character.\n")  
-def search_for_player:
-    stat_to_search_by = input("What stat would you like to search by, race, class, level, str, dex, cha, int, or name?\n").strip().lower()
-    if stat_to_search_by == "race":
-        search_race = input("What is their race?\n").strip()
-    elif stat_to_search_by == "class":
-        search_class= input("What is their class?\n").strip()
-    elif stat_to_search_by == "level":
-        search_level= input("What is their level?\n").strip()
-    elif stat_to_search_by == "str":
-        search_str = input("What is their strength?\n").strip()
-    elif stat_to_search_by == "dex":
-        search_dex = input("What is their dexterity?\n").strip()
-    elif stat_to_search_by == "cha":
-        search_cha = input("What is their charisma?\n").strip()
-    elif stat_to_search_by == "int":
-        search_int = input("What is their intelligence?\n").strip()
-    elif stat_to_search_by == "name":
-        search_name = input("What is their name?\n").strip()
-    else:
-        print("That isn't a stat.")
-#main function for loop
-def edit(dictionary):
+#main function for selection how you are editing the dictionary
+def edit(dictionary,dictname):
     while True:
-        print(f"1:View your weapons\n2:Add weapon to inventory\n3:Remove item from inventory\n4:Search inventory for specific weapon/attribute\n5:Exit\n6:Compare characters\n7:Search for a player\nWhich option do you want to use?")
+        print(f"1:View your {dictname}\n2:add to {dictname}\n3:remove a {dictname}\n4:search {dictname} for specific name/attribute\n5:Exit editor\nWhich option do you want to use?")
         inp=ensure(1,6)
         if inp==1:
             view(dictionary)
@@ -103,12 +84,20 @@ def edit(dictionary):
             search(dictionary)
         elif inp==5:
             break
-        elif inp==6:
-            compare_characters
-        elif inp==7:
-            search_for_player
+    return dictionary
 #User input for choosing dictionary to edit
-def choice(list,weapons,spells,skills,inventory):
-    pass
-
-edit(weapons)
+def choice(tuple):
+    print(f"What would you like to edit?\n1:weapons\n2:inventory")
+    if cls=="wizard":
+        print("3:spells")
+    inp=ensure(1,len(tuple)+1)
+    if inp==1:
+        edit(weapons,"weapons")
+        return weapons
+    if inp==2:
+        edit(inventory,"inventory")
+        return inventory
+    if inp==3:
+        edit(spells,"spells")
+        return spells
+choice(dictionaries)
