@@ -28,35 +28,45 @@ class_skills = {
         20: ["champion"]  
     }  
 }  
-#define class_proficiencies as a dictionary  
-#   wizard to: ["arcana", "history", "insight", "investigation"]  
-#   rogue to: ["stealth", "acrobatics", "sleight of hand", "deception", "perception"]  
-#   fighter to: ["athletics", "intimidation", "survival", "perception"]  
+def class_proficiencies = {  
+   wizard to: ["arcana", "history", "insight", "investigation"]  
+   rogue to: ["stealth", "acrobatics", "sleight of hand", "deception", "perception"]  
+   fighter to: ["athletics", "intimidation", "survival", "perception"]  
+}
   
-#define function get_class_features(character_class, level)  
+#define function get_class_features(character_class, level) 
+def get_class_features(character_class, level):
 #   create empty set called skills  
-#   for each key lv in class_skills[character_class], in increasing order:  
+    skills = {}
+#   for each key lv in class_skills[character_class], in increasing order:
+    for lv in class_skills[character_class]:
 #       if level greater than or equal to lv:  
-#           for each skill in class_skills[character_class][lv]:  
+        if level >= lv:
+#           for each skill in class_skills[character_class][lv]
+           for skill in class_skills[character_class][lv]:
 #               add skill to skills  
 #   set proficiencies to set of class_proficiencies[character_class]  
 #   return skills, proficiencies  
   
-#define function show_class_info_and_choose(skills, proficiencies, character_class, character_level)  
+#define function show_class_info_and_choose(skills, proficiencies, character_class, character_level)
+def how_class_info_and_choose(skills, proficiencies, character_class, character_level):
 #   loop forever:  
+    while True:
 #       display "do you want to view skills, proficiencies, or levels for a class? type 'add skill', 'add proficiency', or 'continue' to proceed:"  
-#       get user input as choice  
-#         
-#       if choice equal to "skills":  
-#           display "which class? (wizard, rogue, fighter):"  
+#       get user input as choice
+        choice =input("do you want to view skills, proficiencies, or levels for a class? type 'add skill', 'add proficiency', or 'continue' to proceed:") 
+#         ("
+#       if choice equal to "skills":
+        if choice == "skills":
+            input("which class? (wizard, rogue, fighter):") 
 #           get user input as class_choice  
 #           for each level in class_skills[class_choice], in order:  
 #               display "level {level}: {class_skills[class_choice][level]}"  
-#         
-#       else if choice equal to "proficiencies":  
-#           display "which class? (wizard, rogue, fighter):"  
+        elif choice == "proficiencies":  
+#           display "which class? (wizard, rogue, fighter):"
+             class_choice = input("which class? (wizard, rogue, fighter):")   
 #           get user input as class_choice  
-#           display "proficiencies for {class_choice}: {class_proficiencies[class_choice]}"  
+#           print "proficiencies for {class_choice}: {class_proficiencies[class_choice]}"  
 #         
 #       else if choice equal to "levels":  
 #           display "which class? (wizard, rogue, fighter):"  
