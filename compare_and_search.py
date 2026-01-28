@@ -1,14 +1,14 @@
 #BH 2nd RPG character manager
 # COMPARE
 def compare():
-    compare_first_character = input(characters, "Select your first character.\n")
+    compare_first_character = input(f"{characters}, Select your first character.\n")
     while compare_first_character not in characters:
-        print("Try again. That character doesn't exit yet. :(")
-        compare_first_character = input(characters, "Select your first character.\n")       
+        print("Try again. That character doesn't exit yet. :")
+        compare_first_character = input(f"{characters}, Select your first character.\n")       
     compare_second_character = input(characters, "Select your second character.\n")
     while compare_second_character not in characters:
-        print("Try again. That character doesn't exit yet. :(")
-        compare_second_character = input(characters, "Select your first character.\n")  
+        print("Try again. That character doesn't exit yet. :")
+        compare_second_character = input(f"{characters}, Select your first character.\n")  
 
 
 
@@ -33,3 +33,6 @@ def search():
         search_name = input("What is their name?\n").strip()
     else:
          print("That isn't a stat.")
+
+compare()
+search()
